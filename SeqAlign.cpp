@@ -5,13 +5,19 @@
 #include <cstdlib>
 #include <fstream>
 
+#include "ScoringMatrix.cpp"
+
 
 int main(int argc, char* argv[]){
     
     std::string seq1 = argv[1];
-
     std::string seq2 = argv[2];
-
+    
+    ScoringMatrix matrix(seq1, seq2);
+    matrix.setCosts(-2, 1, -1);
+    matrix.printMatrix();
+    
+/*
     int seq1L = seq1.length() + 1;
     int seq2L = seq2.length() + 1;
 
@@ -42,6 +48,6 @@ int main(int argc, char* argv[]){
     for(int i = 0; i < seq2L; ++i){
         std::cout << Matrix[i][0] << "\n";
     }
-
+*/
 
 }
