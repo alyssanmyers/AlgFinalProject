@@ -15,7 +15,7 @@ int main(int argc, char* argv[]){
     int seq1L = seq1.length() + 1;
     int seq2L = seq2.length() + 1;
 
-    char Matrix[seq1L][seq2L];
+    int Matrix[seq1L][seq2L];
 
     int gap = -2;
     int match = 1;
@@ -35,6 +35,13 @@ int main(int argc, char* argv[]){
         
     }
 
+    for(int i = 0; i < seq2L; ++i){
+        std::cout << Matrix[0][i];
+    }
+    std::cout  << "\n";
+    for(int i = 0; i < seq2L; ++i){
+        std::cout << Matrix[i][0] << "\n";
+    }
 
 
 }
