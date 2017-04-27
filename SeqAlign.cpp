@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include <fstream>
 
-<<<<<<< HEAD
 int main(int argc, char *argv[])
 {
 
