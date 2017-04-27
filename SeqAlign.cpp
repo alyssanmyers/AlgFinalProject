@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <fstream>
 
+<<<<<<< HEAD
 int main(int argc, char *argv[])
 {
 
@@ -15,6 +16,23 @@ int main(int argc, char *argv[])
     // get the two lengths of the sequences
     int seq1L = seq1.length();
     int seq2L = seq2.length();
+=======
+#include "ScoringMatrix.cpp"
+
+
+int main(int argc, char* argv[]){
+    
+    std::string seq1 = argv[1];
+    std::string seq2 = argv[2];
+    
+    ScoringMatrix matrix(seq1, seq2);
+    matrix.setCosts(-2, 1, -1);
+    matrix.printMatrix();
+    
+/*
+    int seq1L = seq1.length() + 1;
+    int seq2L = seq2.length() + 1;
+>>>>>>> b946b35f8828754d15548da3e954e95aa1aa95a6
 
     // set up a matrix of appropratie size
     int Matrix[seq1L][seq2L];
@@ -38,6 +56,7 @@ int main(int argc, char *argv[])
         Matrix[i][0] = i * gap;
     }
 
+<<<<<<< HEAD
     // fill the matrix
     for (int i = 0; i < seq1L; ++i)
     {
@@ -64,8 +83,18 @@ int main(int argc, char *argv[])
             else if (max == above)
                 Matrix[i][j] = above;
         }
+=======
+    for(int i = 0; i < seq2L; ++i){
+        std::cout << Matrix[0][i];
     }
+    std::cout  << "\n";
+    for(int i = 0; i < seq2L; ++i){
+        std::cout << Matrix[i][0] << "\n";
+>>>>>>> b946b35f8828754d15548da3e954e95aa1aa95a6
+    }
+*/
 
+<<<<<<< HEAD
     for (int i = 0; i < seq2L; ++i)
     {
         for (int j = 0; j < seq1L; ++j)
@@ -77,4 +106,6 @@ int main(int argc, char *argv[])
     std::cout << std::endl;
 
     return 0;
+=======
+>>>>>>> b946b35f8828754d15548da3e954e95aa1aa95a6
 }
