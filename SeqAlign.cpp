@@ -12,8 +12,8 @@ int main(int argc, char* argv[]){
 
     std::string seq2 = argv[2];
 
-    std::cout << "Hello";
-
+    int seq1L = seq1.length();
+    int seq2L = seq2.length();
 
 
 }
