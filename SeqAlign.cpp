@@ -5,12 +5,15 @@
 #include <cstdlib>
 #include <fstream>
 
-// set up matrix
-char** setUpMatrix(std::string s1, std::string s2);
-
 
 int main(int argc, char* argv[]){
     
+    std::string seq1 = argv[1];
+
+    std::string seq2 = argv[2];
+
+    
+
 
 
 }
