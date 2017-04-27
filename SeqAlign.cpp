@@ -12,7 +12,7 @@ int main(int argc, char* argv[]){
 
     std::string seq2 = argv[2];
 
-    
+    std::cout << "Hello";
 
 
 
