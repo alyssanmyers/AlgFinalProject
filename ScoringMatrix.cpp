@@ -16,7 +16,6 @@ class ScoringMatrix
 {
 private:
     unsigned int width, height;
-    int gap, match, mismatch;
     string sequence1, sequence2;
     vector<vector<int>> matrix;
     
@@ -26,8 +25,8 @@ public:
     ScoringMatrix();
     ScoringMatrix(string, string);
     
-    // sets the values for gaps, matches, and mismatches
-    void setCosts(int, int, int);
+    // sets the first row and column
+    void generateFirstRC(int);
     
     // retrieves the width
     unsigned int getWidth();
@@ -61,7 +60,6 @@ ScoringMatrix::ScoringMatrix()
 
 ScoringMatrix::ScoringMatrix(string sequence1, string sequence2)
 {
-
     this->sequence1 = sequence1;
     this->sequence2 = sequence2;
     
@@ -75,20 +73,16 @@ ScoringMatrix::ScoringMatrix(string sequence1, string sequence2)
     }
 }
 
-void ScoringMatrix::setCosts(int gap, int match, int mismatch)
+void ScoringMatrix::generateFirstRC(int gap)
 {
-    this->gap = gap;
-    this->match = match;
-    this->mismatch = mismatch;
-    
     // set up the first row with gap value
-    for (int i = 0; i < sequence1.length() + 1; i++)
+    for (int i = 0; i < width; i++)
     {
         matrix[0][i] = i * gap;
     }
     
     // set up the first column with gap value
-    for (int i = 0; i < sequence2.length() + 1; i++)
+    for (int i = 0; i < height; i++)
     {
         matrix[i][0] = i * gap;
     }
