@@ -8,12 +8,14 @@
 
 int main(int argc, char* argv[]){
     
-    std::string seq1 = argv[1];
+    std::string seq1(argv[1]);
 
-    std::string seq2 = argv[2];
+    std::string seq2(argv[2]);
 
-    int seq1L = seq1.length() + 1;
-    int seq2L = seq2.length() + 1;
+    int seq1L = seq1.length();
+    int seq2L = seq2.length();
+    std::cout << "1: " << seq1L << "\n" << std::endl;
+    std::cout << "2: " << seq2L << "\n" << std::endl;
 
     int Matrix[seq1L][seq2L];
 
@@ -39,7 +41,7 @@ int main(int argc, char* argv[]){
         std::cout << Matrix[0][i];
     }
     std::cout  << "\n";
-    for(int i = 0; i < seq2L; ++i){
+    for(int i = 1; i < seq1L; ++i){
         std::cout << Matrix[i][0] << "\n";
     }
 
