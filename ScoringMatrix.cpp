@@ -63,8 +63,8 @@ ScoringMatrix::ScoringMatrix(string sequence1, string sequence2)
     this->sequence1 = sequence1;
     this->sequence2 = sequence2;
     
-    width = sequence1.length() + 1;
-    height = sequence2.length() + 1;
+    width = sequence1.length();
+    height = sequence2.length();
     
     matrix.resize(width);
     for (auto& entry : matrix)
@@ -78,13 +78,13 @@ void ScoringMatrix::generateFirstRC(int gap)
     // set up the first row with gap value
     for (int i = 0; i < width; i++)
     {
-        matrix[0][i] = i * gap;
+        matrix[i][0] = i * gap;
     }
     
     // set up the first column with gap value
-    for (int i = 0; i < height; i++)
+    for (int j = 0; j < height; j++)
     {
-        matrix[i][0] = i * gap;
+        matrix[0][j] = j * gap;
     }
 }
 
@@ -149,12 +149,12 @@ void ScoringMatrix::setValue(const unsigned int& x, const unsigned int& y, const
 
 void ScoringMatrix::printMatrix()
 {
-    for (int y = 0; y < height; y++)
+    for (int j = 0; j < height; j++)
     {
         cout << " | ";
-        for (int x = 0; x < width; x++)
+        for (int i = 0; i < width; i++)
         {
-            cout << getValue(x,y) << " | ";
+            cout << getValue(i,j) << " | ";
         }
         cout << endl;
     }

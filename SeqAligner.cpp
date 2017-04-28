@@ -62,8 +62,14 @@ void SeqAligner::setCosts(int gap, int match, int mismatch)
 
 void SeqAligner::executeAlgorithm()
 {
-    cost_matrix.setValue(1, 1, computeCellCost(1, 1));
-    cost_matrix.setValue(2, 1, computeCellCost(2, 1));
+    for (int j = 1; j < cost_matrix.getHeight(); j++)
+    {
+        for (int i = 1; i < cost_matrix.getWidth(); i++)
+        {
+            int new_value = computeCellCost(i, j);
+            cost_matrix.setValue(i, j, new_value);
+        }
+    }
 }
 
 int SeqAligner::computeCellCost(int i, int j)
@@ -82,13 +88,15 @@ int SeqAligner::computeCellCost(int i, int j)
     case1 = diagonal + (s1 == s2 ? match : mismatch);
     case2 = left + gap;
     case3 = top + gap;
-    /*
-    cout << "Case 1: " << diagonal << " + " << (s1 == s2 ? match : mismatch) << endl
-    << "Case 2 : " << left << " + " << gap << endl
-    << "Case 3 : " << top << " + " << gap << endl;
     
+    /*
     cout << "seq1 : " << s1 << "\nseq2: " << s2 << endl;
+    
+    cout << "Case 1: " << diagonal << " + " << (s1 == s2 ? match : mismatch) << " = " << case1 << endl
+    << "Case 2 : " << left << " + " << gap << " = " << case2 << endl
+    << "Case 3 : " << top << " + " << gap << " = " << case3 << endl << endl;
     */
+    
     return max ( max (case1, case2), case3);
 }
 
