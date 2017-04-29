@@ -106,15 +106,7 @@ int SeqAligner::computeCellCost(int i, int j)
     case1 = diagonal + (s1 == s2 ? match : mismatch);
     case2 = left + gap;
     case3 = top + gap;
-    
-    /*
-    cout << "seq1 : " << s1 << "\nseq2: " << s2 << endl;
-    
-    cout << "Case 1: " << diagonal << " + " << (s1 == s2 ? match : mismatch) << " = " << case1 << endl
-    << "Case 2 : " << left << " + " << gap << " = " << case2 << endl
-    << "Case 3 : " << top << " + " << gap << " = " << case3 << endl << endl;
-    */
-    
+
     return max ( max (case1, case2), case3);
 }
 
@@ -127,9 +119,18 @@ void SeqAligner::findLowestCell(int *i, int *j, Direction *dir)
     // retrieves the current value
     int current_value = cost_matrix.getValue(*i, *j);
     
-    diagonal = cost_matrix.getValue(*i - 1, *j - 1);
-    left = cost_matrix.getValue(*i - 1, *j);
-    top = cost_matrix.getValue(*i, *j - 1);
+    if (*i > 0 && *j > 0)
+    {
+        diagonal = cost_matrix.getValue(*i - 1, *j - 1);
+    }
+    if (*i > 0)
+    {
+        left = cost_matrix.getValue(*i - 1, *j);
+    }
+    if (*j > 0)
+    {
+        top = cost_matrix.getValue(*i, *j - 1);
+    }
     
     s1 = sequence1.at(*i);
     s2 = sequence2.at(*j);
@@ -157,10 +158,10 @@ void SeqAligner::traceBack(string *seq1, string *seq2)
     int i = cost_matrix.getWidth() - 1;
     int j = cost_matrix.getHeight() - 1;
     
-    do
+    while (i > 0 || j > 0)
     {
         Direction dir;
-        string t1, t2;
+        string t1 = "", t2 = "";
         t1 = sequence1.at(i);
         t2 = sequence2.at(j);
         
@@ -181,7 +182,8 @@ void SeqAligner::traceBack(string *seq1, string *seq2)
             seq1->append("-");
             seq2->append(t2);
         }
-    } while (i > 0 || j > 0);
+        
+    }
     
     reverse (seq1->begin(), seq1->end());
     reverse (seq2->begin(), seq2->end());

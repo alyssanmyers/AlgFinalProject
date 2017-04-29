@@ -23,10 +23,13 @@ int main(int argc, char* argv[]){
         
         std::string aligned_sequence1;
         std::string aligned_sequence2;
-        
+        std::cout<<"before aligner."<<std::endl;
         SeqAligner aligner(seq1, seq2);
+        std::cout<<"after aligner."<<std::endl;
         aligner.setCosts(-1, 1, 0);
+        std::cout<<"after set costs."<<std::endl;
         aligner.executeAlgorithm();
+        std::cout<<"after algorithm."<<std::endl;
         
         aligned_sequence1 = aligner.aligned_sequence1;
         aligned_sequence2 = aligner.aligned_sequence2;
