@@ -48,6 +48,8 @@ public:
     
     // prints the matrix
     void printMatrix();
+
+    int getScore();
 };
 
 ScoringMatrix::ScoringMatrix()
@@ -161,6 +163,10 @@ void ScoringMatrix::printMatrix()
         }
         cout << endl;
     }
+}
+
+int ScoringMatrix::getScore(){
+    return getValue(width - 1, height - 1);
 }
 
 
