@@ -2,7 +2,7 @@
 // Alyssa Myers & Luciano Mogorovic
 // 3460:435 Algorithms
 // Project 4 — DNA Sequence Alignment
-// May 3, 2017
+// May 5, 2017
 //
 // Comparing two sequences using dynamic programming algorithm.
 /*************************************************************/

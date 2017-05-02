@@ -2,7 +2,7 @@
 // Alyssa Myers & Luciano Mogorovic
 // 3460:435 Algorithms
 // Project 4 — DNA Sequence Alignment
-// May 3, 2017
+// May 5, 2017
 //
 // Comparing two sequences using dynamic programming algorithm.
 /*************************************************************/
@@ -13,23 +13,30 @@
 #include "ScoringMatrix.cpp"
 #include "SeqAligner.cpp"
 
-int main(int argc, char* argv[]){
-  
+#define GAP -1
+#define MATCH 1
+#define MISMATCH 0
+
+void checkInput(string *);
+
+int main(int argc, char* argv[])
+{
+    std::string seq1 = argv[1];
+    std::string seq2 = argv[2];
+    
+    // check for appropriate chars
+    checkInput(&seq1);
+    checkInput(&seq2);
+    
     // check proper number of arguments
     if (argc == 3)
     {
-        std::string seq1 = argv[1];
-        std::string seq2 = argv[2];
-        
         std::string aligned_sequence1;
         std::string aligned_sequence2;
-        std::cout<<"before aligner."<<std::endl;
+
         SeqAligner aligner(seq1, seq2);
-        std::cout<<"after aligner."<<std::endl;
-        aligner.setCosts(-1, 1, 0);
-        std::cout<<"after set costs."<<std::endl;
+        aligner.setCosts(GAP, MATCH, MISMATCH);
         aligner.executeAlgorithm();
-        std::cout<<"after algorithm."<<std::endl;
         
         aligned_sequence1 = aligner.aligned_sequence1;
         aligned_sequence2 = aligner.aligned_sequence2;
@@ -42,4 +49,18 @@ int main(int argc, char* argv[]){
     }
     
     return 0;
+}
+
+void checkInput(string *sequence)
+{
+    for (int i = 0; i < sequence->length(); i++)
+    {
+        char temp = toupper(sequence->at(i));
+        if ( (temp != 'A') && (temp != 'T') && (temp != 'C') && (temp != 'G') )
+        {
+            string err = "Invalid argument type! (a/t/c/g) : ";
+            err += temp;
+            throw runtime_error(err);
+        }
+    }
 }
