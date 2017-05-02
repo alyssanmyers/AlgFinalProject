@@ -1,11 +1,11 @@
-/*******************************************************/
+/*************************************************************/
 // Alyssa Myers & Luciano Mogorovic
 // 3460:435 Algorithms
 // Project 4 — DNA Sequence Alignment
 // May 3, 2017
 //
-// Some description here!
-/*******************************************************/
+// Comparing two sequences using dynamic programming algorithm.
+/*************************************************************/
 
 #include <string>
 #include <vector>
@@ -16,7 +16,6 @@ class ScoringMatrix
 {
 private:
     unsigned int width, height;
-    int gap, match, mismatch;
     string sequence1, sequence2;
     vector<vector<int>> matrix;
     
@@ -26,8 +25,8 @@ public:
     ScoringMatrix();
     ScoringMatrix(string, string);
     
-    // sets the values for gaps, matches, and mismatches
-    void setCosts(int, int, int);
+    // sets the first row and column
+    void generateFirstRC(int);
     
     // retrieves the width
     unsigned int getWidth();
@@ -61,12 +60,11 @@ ScoringMatrix::ScoringMatrix()
 
 ScoringMatrix::ScoringMatrix(string sequence1, string sequence2)
 {
-
     this->sequence1 = sequence1;
     this->sequence2 = sequence2;
     
-    width = sequence1.length() + 1;
-    height = sequence2.length() + 1;
+    width = sequence1.length();
+    height = sequence2.length();
     
     matrix.resize(width);
     for (auto& entry : matrix)
@@ -75,22 +73,18 @@ ScoringMatrix::ScoringMatrix(string sequence1, string sequence2)
     }
 }
 
-void ScoringMatrix::setCosts(int gap, int match, int mismatch)
+void ScoringMatrix::generateFirstRC(int gap)
 {
-    this->gap = gap;
-    this->match = match;
-    this->mismatch = mismatch;
-    
     // set up the first row with gap value
-    for (int i = 0; i < sequence1.length() + 1; i++)
+    for (int i = 0; i < width; i++)
     {
-        matrix[0][i] = i * gap;
+        matrix[i][0] = i * gap;
     }
     
     // set up the first column with gap value
-    for (int i = 0; i < sequence2.length() + 1; i++)
+    for (int j = 0; j < height; j++)
     {
-        matrix[i][0] = i * gap;
+        matrix[0][j] = j * gap;
     }
 }
 
@@ -155,12 +149,15 @@ void ScoringMatrix::setValue(const unsigned int& x, const unsigned int& y, const
 
 void ScoringMatrix::printMatrix()
 {
-    for (int y = 0; y < height; y++)
+    for (int j = 0; j < height; j++)
     {
         cout << " | ";
-        for (int x = 0; x < width; x++)
+        for (int i = 0; i < width; i++)
         {
-            cout << getValue(x,y) << " | ";
+            if(getValue(i,j) >= 0)
+                cout << getValue(i,j) << "  | ";
+            else
+                cout << getValue(i,j) << " | "; 
         }
         cout << endl;
     }
