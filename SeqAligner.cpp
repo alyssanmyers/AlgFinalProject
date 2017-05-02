@@ -189,3 +189,9 @@ void SeqAligner::traceBack(string *seq1, string *seq2)
     reverse (seq2->begin(), seq2->end());
 }
 
+
+
+
+
+
+

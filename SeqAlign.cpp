@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
     {
         std::string aligned_sequence1;
         std::string aligned_sequence2;
-
+        
         SeqAligner aligner(seq1, seq2);
         aligner.setCosts(GAP, MATCH, MISMATCH);
         aligner.executeAlgorithm();
@@ -42,6 +42,19 @@ int main(int argc, char* argv[])
         aligned_sequence2 = aligner.aligned_sequence2;
         std::cout << aligned_sequence1 << std::endl << aligned_sequence2 << std::endl;
         aligner.getMatrix().printMatrix();
+        
+        if(aligner.getMatrix().getScore() <= 0){
+            std::cout << "No relation" << std::endl;
+        }
+        else if(seq1.length() == seq2.length()){
+            double percent = (double)(aligner.getMatrix().getScore())/seq1.length();
+            std::cout << "Percent Related: " << percent*100 << "%" << std::endl;
+        }
+        else if(seq1.length() != seq2.length()){
+            int length = seq1.length() < seq2.length() ? seq1.length() : seq2.length();
+            double percent = (double)(aligner.getMatrix().getScore())/length;
+            std::cout << "Percent Related: " << percent*100 << "%" << std::endl;
+        }
     }
     else
     {
